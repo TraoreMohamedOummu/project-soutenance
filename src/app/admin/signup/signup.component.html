@@ -1,0 +1,100 @@
+<div class="row m-3 ">
+    <div class="col-8">
+        <div class="card card-primary ">
+            <div class="card-header ">
+              <h3 class="card-title">
+                <i class=" nav-icon fa fa-user" aria-hidden="true"></i>
+                Creation d'un compte
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form [formGroup]="formUser" (ngSubmit)="onRegister()" >
+              <div class="card-body">
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label for="nom">Nom Complet</label>
+                    <input type="text" class="form-control" id="name"
+                    formControlName="name"
+                     placeholder="Votre nom complet">
+                     <div class="text-danger" *ngIf="formUser.controls['name'].invalid &&
+                      (isFormSubmitted || formUser.controls['name'].touched || formUser.controls['name'].dirty)  ">
+                      <span *ngIf="formUser.controls['name'].errors?.['required']">
+                        Le Champs est requis
+                      </span>
+                      <span *ngIf="formUser.controls['name'].errors?.['minlength']">
+                        minimum 8 caracteres
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-6">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email"
+                    formControlName="email"
+                     placeholder="Votre Email">
+                     <div class="text-danger" *ngIf="formUser.controls['email'].invalid &&
+                      (isFormSubmitted || formUser.controls['email'].touched || formUser.controls['email'].dirty)  ">
+                      <span *ngIf="formUser.controls['email'].errors?.['required']">
+                        Le Champs est requis
+                      </span>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label for="telephone">Telephone</label>
+                    <input type="text" class="form-control" id="telephone"
+                    formControlName="telephone"
+                     placeholder="Votre Numero">
+                     <div class="text-danger" *ngIf="formUser.controls['telephone'].invalid &&
+                     (isFormSubmitted || formUser.controls['telephone'].touched || formUser.controls['telephone'].dirty)  ">
+                     <span *ngIf="formUser.controls['telephone'].errors?.['required']">
+                       Le Champs est requis
+                     </span>
+                   </div>
+                </div>
+                <div class="form-group col-6">
+                  <label for="password">Mot de passe</label>
+                  <input type="password" class="form-control" id="password"
+                  formControlName="password"
+                   placeholder="Votre mot de passe">
+                   <div class="text-danger" *ngIf="formUser.controls['password'].invalid &&
+                  (isFormSubmitted || formUser.controls['password'].touched || formUser.controls['password'].dirty)  ">
+                  <span *ngIf="formUser.controls['password'].errors?.['required']">
+                    Le Champs est requis
+                  </span>
+                  <span *ngIf="formUser.controls['password'].errors?.['minlength']">
+                    minimum 8 caracteres
+                  </span>
+                </div>
+                 </div>
+                </div>
+               
+                <div class="form-group">
+                    <label for="adresse">Adresse</label>
+                    <input type="text" class="form-control" id="adresse"
+                    formControlName="adresse"
+                     placeholder="Votre Adresse">
+                     <div class="text-danger" *ngIf="formUser.controls['adresse'].invalid &&
+                     (isFormSubmitted || formUser.controls['adresse'].touched || formUser.controls['adresse'].dirty)  ">
+                     <span *ngIf="formUser.controls['adresse'].errors?.['required']">
+                       Le Champs est requis
+                     </span>
+                   </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+        
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                  <i class="nav-icon fa fa-plus" aria-hidden="true"></i>
+                  Créer <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+    </div>
+    
+</div>

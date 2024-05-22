@@ -1,0 +1,113 @@
+<div class="row d-flex justify-content-around  my-3 mx-2  ">
+    <div class="col-7 m-1 ">
+       
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Informations personnelles</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+          <div class="card-body">
+            <div class="text-center my-4">
+              <img [src]="userImagePath" [width]="150" [height]="150" class="img-circle img-thumbnail" alt="Image user">
+          </div>
+          <div>
+            
+            <table class="table table-striped " *ngIf="user">
+                  <tr>
+                    <th>Nom Complet : </th>
+                    <td>{{user.name}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Email : </th>
+                    <td>{{user.email}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Telephone : </th>
+                    <td>{{user.telephone}}</td>
+                  </tr>
+      
+                  <tr>
+                    <th scope="col">Adresse : </th>
+                    <td>{{user.adresse}}</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="col">Role : </th>
+                    <td>{{user.role_id === 2 ? "User" : "Admin"}}</td>
+                  </tr>
+
+
+            </table>
+        </div>
+      </div>
+          <!-- /.card-body -->
+    </div>
+    </div>
+    <div class="col-4 m-2 ">
+        
+      <div class="card card-primary">
+        <div class="card-header">
+          <h5 class="card-title ">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+            Modification de l'utilisateur
+          </h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formUpdate" (ngSubmit)="onUpdate()">
+            <div class="text-center my-4" *ngIf="!selectedFile">
+              <img [src]="userImagePath" [width]="150" [height]="150" class="img-circle img-thumbnail" alt="">
+             </div>
+             <div class="text-center my-4 " *ngIf="selectedFile">
+              <img [src]="imagePreview" [width]="150" [height]="150" class="img-circle img-thumbnail" alt="Image prévisualisée">
+            </div>
+             <div>
+              <div class="custom-file">
+                  <input type="file" class="custom-file-input"
+                  formControlName="photo"
+                  (change)="onFileSelected($event)"
+                   id="customFile">
+                  <label class="custom-file-label" for="customFile">Parcourir</label>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="role">Roles</label>
+            <select class="custom-select rounded-0" id="role"
+            formControlName="role_id"
+             >
+            <ng-container *ngFor="let role of roles">
+             
+                <option [value]="role.id">{{role.name}}</option>
+             
+            </ng-container>
+            </select>
+            <div class="text-danger" *ngIf="formUpdate.controls['role_id'].invalid &&
+                     (isFormSubmitted || formUpdate.controls['role_id'].dirty)">
+                     <span *ngIf="formUpdate.controls['role_id'].errors?.['role_id']">
+                       Le Champs est requis
+                     </span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-edit" aria-hidden="true"></i>
+              Modifier
+              <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+  
+            </button>
+          </div>
+          </form> 
+        </div>     
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

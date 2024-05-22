@@ -1,0 +1,61 @@
+<div class="card card-primary m-4">
+    <div class="card-header">
+      <h3 class="card-title">
+        {{slider ? "Modification de slider" : "Ajout d'une slider" }}
+      </h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form [formGroup]="formSlider">
+      <div class="card-body">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" id="nom"
+          formControlName="name"
+           placeholder="Entrer le nom de slider">
+           <div class="text-danger" *ngIf="formSlider.controls['name'].invalid
+            && (formSlider.controls['name'].touched || formSlider.controls['name'].dirty)">
+               <span *ngIf="formSlider.controls['name'].errors?.['required']">
+                le Champ est requis
+               </span>
+           </div>
+        </div>
+        <div class="row">
+            <div class="custom-file col-6">
+                <input type="file" class="custom-file-input"
+                formControlName="photo"
+                (change)="onFileSelected($event)"
+                 id="customFile">
+                <label class="custom-file-label" for="customFile">
+                    Selectionnez une image
+                </label>
+            </div>
+           <div class="col-6" >
+            <div class="text-center my-4 " *ngIf="selectedFile">
+                <img [src]="imagePreview" [width]="300" [height]="300"
+                 class="img-thumbnail  img-thumbnail" alt="Image prévisualisée">
+            </div>
+            <div class="text-center my-4 " *ngIf="!selectedFile">
+              <img [src]="'http://localhost:8000/slider_images/' + slider.photo" [width]="300" [height]="300"
+               class="img-thumbnail  img-thumbnail" alt="Image prévisualisée">
+          </div>
+           </div>
+        </div>
+        
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button (click)="onSubmit()" type="button" class="btn btn-primary">
+            <i *ngIf="slider" class="nav-icon fa fa-edit" aria-hidden="true"></i>
+            <i *ngIf="!slider" class="nav-icon fa fa-plus" aria-hidden="true"></i>
+            {{slider ? "Modifier" : "Ajouter" }}
+            <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+        </button>
+        <button (click)="back()" type="button" class="btn btn-danger mx-2 ">
+            Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+

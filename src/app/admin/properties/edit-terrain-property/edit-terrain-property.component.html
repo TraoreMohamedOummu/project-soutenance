@@ -1,0 +1,77 @@
+<div class="card card-primary m-4">
+    <div class="card-header">
+      <h3 class="card-title">
+        Mise à jour du bien
+      </h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form [formGroup]="formTerrain">
+      <div class="card-body">
+
+        <div class="row">
+            <div class="form-group col-6 ">
+                <label for="nom">Longueur</label>
+                <input type="number" class="form-control" id="nom"
+                formControlName="longueur"
+                 placeholder="Entrer la  longueur">
+                 <div class="text-danger" *ngIf="formTerrain.controls['longueur'].invalid
+                  && (isSubmitForm || formTerrain.controls['longueur'].touched || formTerrain.controls['longueur'].dirty) ">
+                     <span *ngIf="formTerrain.controls['longueur'].errors?.['required']">
+                      le Champ est requis
+                     </span>
+                 </div>
+            </div>
+
+            <div class="form-group col-6 ">
+                <label for="largueur">Largueur</label>
+                <input type="number" class="form-control" id="largueur"
+                formControlName="largueur"
+                 placeholder="Entrer la largueur">
+                 <div class="text-danger" *ngIf="formTerrain.controls['largueur'].invalid
+                  && (isSubmitForm ||  formTerrain.controls['largueur'].touched || formTerrain.controls['largueur'].dirty) ">
+                     <span *ngIf="formTerrain.controls['largueur'].errors?.['required']">
+                      le Champ est requis
+                     </span>
+                 </div>
+            </div>
+        </div>
+        
+        <div class="form-group  ">
+            <label for="adresse">Adresse</label>
+            <input type="text" class="form-control" id="adresse"
+            formControlName="adresse"
+             placeholder="Entrer l'adresse">
+             <div class="text-danger" *ngIf="formTerrain.controls['adresse'].invalid
+              && ( isSubmitForm ||  formTerrain.controls['adresse'].touched || formTerrain.controls['adresse'].dirty) ">
+                 <span *ngIf="formTerrain.controls['adresse'].errors?.['required']">
+                  le Champ est requis
+                 </span>
+             </div>
+        </div>
+
+        <div class="form-group">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input"
+               formControlName="status"
+               id="customSwitch1">
+              <label class="custom-control-label" for="customSwitch1">Vendu</label>
+            </div>
+        </div>
+       
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button (click)="onUpdate()" type="button" class="btn btn-primary">
+            <i class="nav-icon fa fa-edit" aria-hidden="true"></i>
+             Appliquer
+            <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+        </button>
+        <button (click)="back()" type="button" class="btn btn-danger mx-2 ">
+            Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+

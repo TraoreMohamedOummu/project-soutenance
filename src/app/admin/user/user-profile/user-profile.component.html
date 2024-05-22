@@ -1,0 +1,120 @@
+<div class="row d-flex justify-content-around  my-3 mx-2  ">
+    <div class="col-7 m-1 ">
+       
+    <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class=" nav-icon fa fa-edit" aria-hidden="true"></i>
+            Modification des informations
+           </h3>
+        </div>
+        <form  [formGroup]="formUpdate" class="p-0">
+            <div class="card-body">
+                <div class="my-4" *ngIf="!selectedFile">
+                    <img [src]="userImagePath" [width]="100" [height]="100" class="img-circle img-thumbnail" alt="Image user">
+                </div>
+
+                <div class="my-4" *ngIf="selectedFile">
+                    <img [src]="imagePreview" [width]="100" [height]="100" class="img-circle img-thumbnail" alt="Image user">
+                </div>
+      
+                <div class="custom-file mb-2 ">
+                      <input type="file" class="custom-file-input"
+                      formControlName="photo"
+                      (change)="onFileSelected($event)"
+                       id="customFile">
+                      <label class="custom-file-label" for="customFile">Parcourir</label>
+                </div>
+                <div class="row">
+                      <div class="form-group col-6">
+                        <label for="nom">Nom Complet</label>
+                        <input type="text" class="form-control" id="name"
+                        formControlName="name">
+                      </div>
+      
+                      <div class="form-group col-6">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email"
+                        formControlName="email">
+                    </div>
+                </div>
+
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="telephone">Telephone</label>
+                      <input type="text" class="form-control" id="telephone"
+                      formControlName="telephone">
+                       
+                    </div>
+    
+                    <div class="form-group col-6">
+                      <label for="adresse">Adresse</label>
+                      <input type="text" class="form-control" id="adresse"
+                      formControlName="adresse">   
+                  </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex ">
+                    <button (click)="onUpdate()" type="button" class="btn btn-primary  ">
+                      <i class="nav-icon fa fa-edit" aria-hidden="true"></i>
+                      Modifier <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+                    </button>
+                    <button type="button" (click)="back()" class="btn btn-danger mx-2">
+                        <i class="nav-icon fa fa-stop " aria-hidden="true"></i>
+                        Annuler
+                    </button>
+            </div>
+          
+        </form>
+      <div>
+    
+    </div>
+    </div>
+    </div>
+
+
+    <div class="col-4 m-2 ">
+        
+
+        <div class="card card-primary">
+            <div class="card-header">
+                <div class="card-title">Modification du mot de passe</div>
+            </div>
+            <form  class="p-0 "  [formGroup]="formResetPassword">
+                <div class="card-body">
+                    <div class="alert alert-danger" *ngIf="messageError">
+                      {{ messageError }}
+                    </div>
+                    <div class="form-group">
+                        <label for="">Ancien Mot de passe</label>
+                        <input type="text" class="form-control" formControlName="ancien_password" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nouveau Mot de passe</label>
+                        <input type="text" class="form-control" formControlName="new_password">
+                    </div>
+                </div>
+    
+                <div class="card-footer">
+                    <button (click)="onResetPassword(user.id) " type="button"
+                     class="btn btn-primary  btn-sm ">
+                        Changer le mot de passe
+                        <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loadingReset"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+      
+      
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

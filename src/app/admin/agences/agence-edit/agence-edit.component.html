@@ -1,0 +1,62 @@
+<div class="card card-primary m-4">
+    <div class="card-header">
+      <h3 class="card-title">
+        {{agence ? "Modification l'agence " : "Ajout d'une agence"}}
+      </h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form  [formGroup]="formAgence" >
+      <div class="card-body">
+        
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" id="nom"
+          formControlName="name"
+           placeholder="Entrer le nom de l'agence">
+           <div class="text-danger" *ngIf="formAgence.controls['name'].invalid
+            && (formAgence.controls['name'].touched || formAgence.controls['name'].dirty) ">
+               <span *ngIf="formAgence.controls['name'].errors?.['required']">
+                le Champ est requis
+               </span>
+           </div>
+        </div>
+        <div class="form-group">
+            <label for="role">Ville</label>
+            <select class="custom-select rounded-0" id="role"
+            formControlName="city_id"
+             >
+            <ng-container *ngFor="let city of Cities">
+             
+                <option [value]="city.id">
+                    {{city.name}}
+                </option>
+             
+            </ng-container>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" rows="3"
+            formControlName="desc"
+             placeholder="Enter ...">
+
+            </textarea>
+          </div>
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button (click)="onSubmitAgence()" type="button" class="btn btn-primary">
+            <i *ngIf="agence" class="nav-icon fa fa-edit" aria-hidden="true"></i>
+            <i *ngIf="!agence" class="nav-icon fa fa-plus" aria-hidden="true"></i>
+            {{agence ? "Modifier" : "Ajouter"}}
+            <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+        </button>
+        <button (click)="back()"  type="button" class="btn btn-danger mx-2 ">
+            Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+

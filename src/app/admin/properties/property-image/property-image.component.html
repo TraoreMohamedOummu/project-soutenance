@@ -1,0 +1,39 @@
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class=" nav-icon fa fa-plus" aria-hidden="true"></i>
+        Ajout des images au bien
+       </h3>
+    </div>
+    <form  class="p-0">
+        <div class="card-body">
+
+            <div class="custom-file mb-2 ">
+                <input type="file" class="custom-file-input"
+                (change)="onFileSelected($event)"
+                multiple
+                 id="customFile">
+                <label class="custom-file-label" for="customFile">Selectionner les images</label>
+          </div>
+            <div id="image-preview" class="property-image">
+
+            </div>
+  
+            
+        </div>
+        <div class="card-footer d-flex ">
+                <button (click)="onSubmit()" type="button" class="btn btn-primary  ">
+                  <i class="nav-icon fa fa-edit" aria-hidden="true"></i>
+                  Appliquer <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+                </button>
+                <button type="button" (click)="back()" class="btn btn-danger mx-2">
+                    <i class="nav-icon fa fa-stop " aria-hidden="true"></i>
+                    Annuler
+                </button>
+        </div>
+      
+    </form>
+  <div>
+
+</div>
+</div>

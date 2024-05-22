@@ -1,0 +1,40 @@
+<div class="card card-primary m-4">
+    <div class="card-header">
+      <h3 class="card-title">
+        {{typeProperty ? "Modification de type de bien" : "Ajout de type de bien" }}
+      </h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form [formGroup]="formTypeProperty">
+      <div class="card-body">
+        
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" id="nom"
+          formControlName="name"
+           placeholder="Entrer le nom de type de bien">
+           <div class="text-danger" *ngIf="formTypeProperty.controls['name'].invalid
+            && (formTypeProperty.controls['name'].touched || formTypeProperty.controls['name'].dirty) ">
+               <span *ngIf="formTypeProperty.controls['name'].errors?.['required']">
+                le Champ est requis
+               </span>
+           </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button (click)="onSubmit()" type="button" class="btn btn-primary">
+            <i *ngIf="typeProperty" class="nav-icon fa fa-edit" aria-hidden="true"></i>
+            <i *ngIf="!typeProperty" class="nav-icon fa fa-plus" aria-hidden="true"></i>
+            {{typeProperty ? "Modifier" : "Ajouter"}}
+            <i class="mx-2 fa fa-spinner fa-spin" *ngIf="loading"></i>
+        </button>
+        <button (click)="back()" type="button" class="btn btn-danger mx-2 ">
+            Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+
