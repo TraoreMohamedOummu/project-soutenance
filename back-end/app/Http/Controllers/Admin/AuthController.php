@@ -106,7 +106,7 @@ class AuthController extends Controller
 
     public function getUserById(int $id) {
        try {
-        $user = User::find($id);
+        $user = User::where('id', $id)->first();
         $roles = Role::all(['id', 'name']);
 
         if($user && $roles) {

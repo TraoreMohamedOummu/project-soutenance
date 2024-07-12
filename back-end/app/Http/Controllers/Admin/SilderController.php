@@ -25,6 +25,14 @@ class SilderController extends Controller
 
     public function createSlider(Request $request) {
 
+        $sliderExiste = Slider::where("name", $request->name)->first();
+        if($sliderExiste) {
+            return response()->json([
+                "status" => false,
+                "message" => "Slider existe déjà",
+            ]);
+        }
+
         $slider = new Slider();
         if($request->hasFile("photo")) {
             $photo = $request->file('photo');
@@ -38,12 +46,12 @@ class SilderController extends Controller
         if($slider->save()) {
             return response()->json([
                 "status" => true,
-                "message" => "Agence ajoutée avec succes",
+                "message" => "Slider ajoutée avec succes",
             ]);
         }else {
             return response()->json([
                 "status" => false,
-                "message" => "Impossible d'ajoutée cette agence",
+                "message" => "Impossible d'ajoutée cette slider",
             ]);
         }
 

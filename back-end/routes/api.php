@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\AchatController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\AgenceController;
+use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\SilderController;
 use App\Http\Controllers\Admin\TypePropertyController;
+use App\Http\Controllers\layout\ClientController;
+use App\Http\Controllers\layout\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -83,8 +87,50 @@ Route::prefix('admin')->controller(AuthController::class)->group(function () {
         Route::put('update-terrain-property/{id}', 'updatePropertyTerrain');
         Route::put('update-feactures-property/{id}', 'updateFeactureProperty');
         Route::delete('delete-property/{id}', 'deleteProperty');
+        Route::get('/properties-trie-by-price', 'triePropertiesByPrice');
+        Route::get('/property-slug/{slug}', 'getPropertyBySlug');
+
 
     });
+
+    Route::controller(MessageController::class)->group(function (){
+
+        Route::post('/create-message', 'createMessage');
+
+
+    });
+
+    Route::controller(AchatController::class)->group(function (){
+
+        Route::get('/achats', 'getAchats');
+        Route::get('/achats/{id}', 'getAchatById');
+        Route::post('/faire-achat', 'createAchat');
+
+    });
+
+    Route::prefix('')->controller(AgentController::class)->group(function () {
+
+        Route::post('/login', 'loginAgent');
+        Route::post('/register', 'createAgent');
+        Route::post('/update-agent/{id}', 'updateAgent');
+        Route::get('/agent/{id}', 'getAgent');
+        Route::post('/update-password/{id}', 'updatePasswordAgent');
+        Route::get('/agents', 'getAgents');
+    
+    });
+    
+
+});
+
+Route::prefix('')->controller(ClientController::class)->group(function () {
+
+    Route::post('/login', 'loginClient');
+    Route::post('/register', 'createClient');
+    Route::post('/update-client/{id}', 'updateClient');
+    Route::get('/client/{id}', 'getClient');
+    Route::post('/update-password/{id}', 'updatePasswordClient');
+    Route::get('/clients', 'getClients');
+    Route::post('/forgot-password', 'sendResetLinkEmail');
 
 });
 
